@@ -39,4 +39,10 @@ class UserListAdapter(private val callback: Listener) : RecyclerView.Adapter<Lis
     }
 
     fun getUsers(): List<User> = users
+
+    fun moveItem(fromPosition: Int, toPosition: Int) {
+        val movedUser = users.removeAt(fromPosition)
+        users.add(toPosition, movedUser)
+        notifyItemMoved(fromPosition, toPosition)
+    }
 }
