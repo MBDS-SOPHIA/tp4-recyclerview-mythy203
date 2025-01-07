@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.magicgithub.R
+import com.openclassrooms.magicgithub.databinding.ItemListUserBinding
 import com.openclassrooms.magicgithub.model.User
 import com.openclassrooms.magicgithub.utils.UserDiffCallback
 
@@ -17,16 +18,19 @@ class UserListAdapter(  // FOR CALLBACK ---
     interface Listener {
         fun onClickDelete(user: User)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListUserViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.item_list_user, parent, false)
-        return ListUserViewHolder(view)
+        val binding = ItemListUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListUserViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: ListUserViewHolder, position: Int) {
         holder.bind(users[position], callback)
+    }
+
+    fun updateUserState(position: Int, isActive: Boolean) {
+        users[position].isActive = isActive
+        notifyItemChanged(position)
     }
 
     override fun getItemCount(): Int {
@@ -39,4 +43,6 @@ class UserListAdapter(  // FOR CALLBACK ---
         users = newList
         diffResult.dispatchUpdatesTo(this)
     }
+    fun getUsers(): List<User> = users
+
 }
