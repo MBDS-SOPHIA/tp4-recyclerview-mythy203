@@ -3,6 +3,7 @@ package com.openclassrooms.magicgithub.ui.user_list
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.openclassrooms.magicgithub.R
@@ -29,6 +30,7 @@ class ListUserActivity : AppCompatActivity(), UserListAdapter.Listener {
     private fun configureRecyclerView() {
         recyclerView = findViewById(R.id.activity_list_user_rv)
         adapter = UserListAdapter(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
